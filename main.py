@@ -1,6 +1,4 @@
 import sys
-import ipdb
-
 import Hash, Abr
 import Class
 import scrapper

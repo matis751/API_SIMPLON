@@ -5,9 +5,6 @@ from flask import request
 import Abr, Class
 from main import creat_tree
 
-
-
-
 app = Flask(__name__)
 @app.route('/text', methods=['POST', 'GET'])
 def create_tree():
@@ -18,4 +15,3 @@ def create_tree():
         return ({r.word_occurence[0] : r.word_occurence[1]})
     else:
         return('Rien trouver')
-
