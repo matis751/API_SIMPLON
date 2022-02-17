@@ -1,21 +1,25 @@
 from flask import Blueprint
 from flask import jsonify
-from flask import Flask
-from flask import request
+from flask import Flask, render_template, request
 import Abr, Class
 from main import creat_tree
-
-
+from flask import json
 
 
 app = Flask(__name__)
-@app.route('/text', methods=['POST', 'GET'])
+
+@app.route('/', methods=['POST', 'GET'])
+
 def create_tree():
-    request.data = 'https://en.wikipedia.org/wiki/Tokyo'
-    tree = creat_tree(Class.Tree(), request.data)
-    r = Abr.Iterative_tree_shearch(tree.root, hash('and'))
+
+    url = request.json['url']
+    word = request.json['word']
+
+    tree = creat_tree(Class.Tree(), url)
+    r = Abr.Iterative_tree_shearch(tree.root, hash(word))
+
     if r is not None:
-        return ({r.word_occurence[0] : r.word_occurence[1]})
+        return jsonify({r.word_occurence[0] : r.word_occurence[1]})
     else:
-        return('Rien trouver')
+        return(' not found')
 
